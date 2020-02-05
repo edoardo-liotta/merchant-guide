@@ -27,7 +27,7 @@ public class CommandFileManager {
         Path sourcePath = getPath(path);
         Path targetPath = Paths.get(sourcePath.getParent().toString(), FilenameUtils.removeExtension(sourcePath.getFileName().toString()) + "-result.txt");
         try (Stream<String> lines = Files.lines(sourcePath)) {
-            String output = lines.map(interpreterStrategy::execute).filter(StringUtils::isNotEmpty).collect(Collectors.joining(System.lineSeparator()));
+            String output = lines.filter(StringUtils::isNotEmpty).map(interpreterStrategy::execute).filter(StringUtils::isNotEmpty).collect(Collectors.joining(System.lineSeparator()));
             Files.write(targetPath, output.getBytes());
         }
         return targetPath;
