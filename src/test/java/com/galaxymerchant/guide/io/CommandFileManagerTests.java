@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CommandFileManagerTests {
@@ -62,7 +64,10 @@ public class CommandFileManagerTests {
         @Test
         @DirtiesContext
         public void test() throws IOException {
-            commandFileManager.parseFile("classpath:test.txt");
+            Path actualPath = commandFileManager.parseFile("classpath:test.txt");
+            List<String> actualLines = Files.lines(actualPath).collect(Collectors.toList());
+            List<String> expectedLines = Files.lines(Paths.get(ResourceUtils.getFile("classpath:expected.txt").toURI())).collect(Collectors.toList());
+            Assertions.assertEquals(expectedLines, actualLines);
         }
     }
 }

@@ -34,7 +34,7 @@ public class IntergalacticConverter {
         if (StringUtils.isEmpty(material) || credits < 0 || units <= 0) {
             throw new IllegalArgumentException();
         }
-        BigDecimal creditsPerUnit = BigDecimal.valueOf(credits).divide(BigDecimal.valueOf(units), RoundingMode.HALF_UP);
+        BigDecimal creditsPerUnit = BigDecimal.valueOf(credits).divide(BigDecimal.valueOf(units), 2, RoundingMode.HALF_UP);
         materialConversionMap.put(material.trim(), creditsPerUnit);
     }
 
