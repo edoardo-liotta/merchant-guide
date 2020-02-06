@@ -2,10 +2,12 @@ package com.galaxymerchant.guide.interpreter;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Optional;
 
+@Component("interpreterStrategy")
 public class GuideInterpreterStrategy implements ApplicationContextAware {
 
     private static final String DEFAULT_ERROR_MESSAGE = "I have no idea what you are talking about";

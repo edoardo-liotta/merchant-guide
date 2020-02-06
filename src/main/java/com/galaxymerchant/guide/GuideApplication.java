@@ -1,6 +1,7 @@
 package com.galaxymerchant.guide;
 
 import com.galaxymerchant.guide.io.CommandFileManager;
+import com.galaxymerchant.guide.io.InteractiveManager;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
@@ -18,9 +19,13 @@ import java.nio.file.Path;
 public class GuideApplication implements CommandLineRunner {
 
     private static final String FILE_OPTION = "f";
+    private static final String INTERACTIVE_OPTION = "i";
 
     @Resource(name = "commandFileManager")
     private CommandFileManager commandFileManager;
+
+    @Resource(name = "interactiveManager")
+    private InteractiveManager interactiveManager;
 
     public static void main(String[] args) {
         SpringApplication.run(GuideApplication.class, args);
@@ -30,6 +35,7 @@ public class GuideApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Options options = new Options();
         options.addOption(FILE_OPTION, true, "the command file to parse");
+        options.addOption(INTERACTIVE_OPTION, "runs as interactive");
 
         CommandLine cmd = new DefaultParser().parse(options, args);
         if (cmd.hasOption(FILE_OPTION)) {
@@ -46,6 +52,10 @@ public class GuideApplication implements CommandLineRunner {
                 System.out.println("I/O exception occurred while accessing path " + path + " , due to " + e.getClass().getCanonicalName() + ": " + e.getMessage());
                 System.exit(2);
             }
+        }
+
+        if (cmd.hasOption(INTERACTIVE_OPTION)) {
+            interactiveManager.run();
         }
     }
 }

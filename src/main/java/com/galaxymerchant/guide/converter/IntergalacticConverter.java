@@ -2,6 +2,7 @@ package com.galaxymerchant.guide.converter;
 
 import com.github.fracpete.romannumerals4j.RomanNumeralFormat;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Component
 public class IntergalacticConverter {
 
     private Map<String, String> intergalacticMap = new HashMap<>();

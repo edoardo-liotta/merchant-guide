@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,8 +28,8 @@ public class CommandFileManager {
         Path sourcePath = getPath(path);
         Path targetPath = Paths.get(sourcePath.getParent().toString(), FilenameUtils.removeExtension(sourcePath.getFileName().toString()) + "-result.txt");
         try (Stream<String> lines = Files.lines(sourcePath)) {
-            String output = lines.filter(StringUtils::isNotEmpty).map(interpreterStrategy::execute).filter(StringUtils::isNotEmpty).collect(Collectors.joining(System.lineSeparator()));
-            Files.write(targetPath, output.getBytes());
+            List<String> output = lines.filter(StringUtils::isNotEmpty).map(interpreterStrategy::execute).filter(StringUtils::isNotEmpty).collect(Collectors.toList());
+            Files.write(targetPath, output);
         }
         return targetPath;
     }

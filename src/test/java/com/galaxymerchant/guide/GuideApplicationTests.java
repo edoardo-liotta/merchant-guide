@@ -1,6 +1,7 @@
 package com.galaxymerchant.guide;
 
 import com.galaxymerchant.guide.io.CommandFileManager;
+import com.galaxymerchant.guide.io.InteractiveManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,6 +21,9 @@ class GuideApplicationTests {
 
     @Mock
     private CommandFileManager commandFileManager = new CommandFileManager(null);
+
+    @Mock
+    private InteractiveManager interactiveManager = new InteractiveManager(null);
 
     @Mock
     private Path sourcePath = new FakePath();
@@ -46,6 +50,12 @@ class GuideApplicationTests {
         guideApplication.run("-f", source);
         Mockito.verify(commandFileManager).getPath(source);
         Mockito.verify(commandFileManager).parseFile(source);
+    }
+
+    @Test
+    public void testInteractiveMode() throws Exception {
+        guideApplication.run("-i");
+        Mockito.verify(interactiveManager).run();
     }
 
     @Test

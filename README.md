@@ -5,9 +5,14 @@
 This Spring Boot project is a solution to the common Merchant's Guide problem. The proposed approach looks for an input file from command-line arguments and generates an output "-result.txt" file next to it. 
 
 ## Usage
-From the project's home folder, run ```./mvnw spring-boot:run -Dspring-boot.run.arguments="-f path-to-file.txt"``` (on Windows, use 'mvnw' command). Alternatively, you can ```mvn package``` the project as a JAR file and run it, e.g. ```java -jar guide-0.0.1-SNAPSHOT.jar -f ../test.txt```.  At this stage, the application cannot be run in interactive mode.
+The application can be run in file parsing mode, interactive mode, or both, by adding the related command-line option.
 
-File path can be either absolute or relative, and can make use of ~ as user home.
+| Option  | Description |
+|---------|-------------|
+| -f path | reads a file and generates an output "-result.txt" file next to it. File path can be either absolute or relative, and can make use of ~ as user home. |
+| -i      | runs interactive mode. Input an empty line to exit. |
+ 
+From the project's home folder, run ```./mvnw spring-boot:run -Dspring-boot.run.arguments="-f path-to-file.txt"``` (on Windows, use 'mvnw' command). Alternatively, you can ```mvn package``` the project as a JAR file and run it, e.g. ```java -jar guide-0.0.1-SNAPSHOT.jar -f ../test.txt``` or ```java -jar guide-0.0.1-SNAPSHOT.jar -i```. 
 
 The Guide currently interprets four commands:
 - Roman assignment: an Intergalactic keyword is assigned a Roman numeral, e.g. 'glob is I' or 'pish means V'
@@ -22,7 +27,7 @@ The Guide currently interprets four commands:
     - Every Intergalactic number used in a Numeral query command should be assigned a Roman in advance, and Credits value for the given material should be assigned in advance.
 
 ## Notes and assumptions
-- Lines are read one by one using java.nio.Files
+- Lines in File parser are read one by one using java.nio.Files
 - Valid assignment commands (either roman or credit) do not produce any output
 - Query commands end with a question mark, separated by the last word by one space at least
 - Roman numerals don't need to be written in Capital, e.g. 'glob is i' is still a valid command
@@ -31,7 +36,7 @@ The Guide currently interprets four commands:
 - Valid Intergalactic numbers may not exceed 3999 (MMMCMXCIX)
 
 ## Technology breakdown
-This project makes use of Java 8 and Spring Boot 2. Annotation configuration was used and JUnit test classes are provided. Integration tests make use of Spring Boot context. Unit tests cover 91% of code lines, according to IntelliJ Code Coverage plugin.
+This project makes use of Java 8 and Spring Boot 2. Annotation configuration was used and JUnit test classes are provided. Integration tests make use of Spring Boot context. Unit tests cover 92% of code lines, according to IntelliJ Code Coverage plugin.
 
 ## External dependencies (other to the ones provided by Spring Boot)
 - Apache Commons Lang3 for String Utilities
