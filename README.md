@@ -1,4 +1,5 @@
-# Merchant's Guide to the Galaxy
+# Merchant's Guide to the Galaxy 
+![Java CI](https://github.com/edoardo-liotta/merchant-guide/workflows/Java%20CI/badge.svg)
 
 ## Introduction
 This Spring Boot project is a solution to the common Merchant's Guide problem. The proposed approach looks for an input file from command-line arguments and generates an output "-result.txt" file next to it. 
