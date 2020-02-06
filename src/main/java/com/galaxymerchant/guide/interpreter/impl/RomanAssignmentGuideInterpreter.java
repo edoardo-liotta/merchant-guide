@@ -14,7 +14,7 @@ public class RomanAssignmentGuideInterpreter implements GuideInterpreter {
 
     private static final String INTERGALACTIC_GROUP = "intergalactic";
     private static final String ROMAN_GROUP = "roman";
-    private static final Pattern PATTERN = Pattern.compile("^(?<" + INTERGALACTIC_GROUP + ">\\w+) (?:is|means) (?<" + ROMAN_GROUP + ">[IVXLCDM])$");
+    private static final Pattern PATTERN = Pattern.compile("^(?<" + INTERGALACTIC_GROUP + ">\\w+) (?:is|means) (?<" + ROMAN_GROUP + ">[IVXLCDM])$", Pattern.CASE_INSENSITIVE);
 
     private ApplicationContext applicationContext;
 
@@ -22,8 +22,8 @@ public class RomanAssignmentGuideInterpreter implements GuideInterpreter {
     public String execute(String command) {
         Matcher m = getPattern().matcher(command);
         m.find();
-        String intergalactic = m.group(INTERGALACTIC_GROUP);
-        String roman = m.group(ROMAN_GROUP);
+        String intergalactic = m.group(INTERGALACTIC_GROUP).toLowerCase();
+        String roman = m.group(ROMAN_GROUP).toUpperCase();
         RomanAssignmentCommand bean = applicationContext.getBean(RomanAssignmentCommand.class);
         bean.setIntergalactic(intergalactic);
         bean.setRoman(roman);

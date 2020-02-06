@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class NumeralQueryGuideInterpreter implements GuideInterpreter {
 
     private static final String INTERGALACTIC_GROUP = "intergalactic";
-    private static final Pattern PATTERN = Pattern.compile("^how much is +(?<" + INTERGALACTIC_GROUP + ">\\w[\\w ]+) +\\?$");
+    private static final Pattern PATTERN = Pattern.compile("^how much is +(?<" + INTERGALACTIC_GROUP + ">\\w[\\w ]+) +\\?$", Pattern.CASE_INSENSITIVE);
 
     private ApplicationContext applicationContext;
 
@@ -20,7 +20,7 @@ public class NumeralQueryGuideInterpreter implements GuideInterpreter {
     public String execute(String command) {
         Matcher m = getPattern().matcher(command);
         m.find();
-        String intergalactic = m.group(INTERGALACTIC_GROUP);
+        String intergalactic = m.group(INTERGALACTIC_GROUP).toLowerCase();
         NumeralQueryCommand bean = applicationContext.getBean(NumeralQueryCommand.class);
         bean.setIntergalactic(intergalactic);
         bean.execute();

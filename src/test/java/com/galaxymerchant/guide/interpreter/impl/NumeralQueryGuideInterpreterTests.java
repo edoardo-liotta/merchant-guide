@@ -33,19 +33,19 @@ public class NumeralQueryGuideInterpreterTests {
 
     @Test
     public void simpleAssignment() {
-        testAssignment("pish tegj glob glob", 42);
-        testAssignment("pish tegj prok glob", 55);
+        testAssignment("pish tegj gloB gLob", 42);
+        testAssignment("pish teGj Prok glob  ", 55);
     }
 
     private void testAssignment(String intergalactic, Integer testResult) {
         initMocks();
         Mockito.when(command.getResult()).thenReturn(testResult);
-        String testCommand = "how much is " + intergalactic + " ?";
+        String testCommand = "How much is " + intergalactic + " ?";
         Assertions.assertTrue(interpreter.matches(testCommand));
         String executionResult = interpreter.execute(testCommand);
-        Mockito.verify(command).setIntergalactic(intergalactic);
+        Mockito.verify(command).setIntergalactic(intergalactic.toLowerCase());
         Mockito.verify(command).execute();
-        Assertions.assertEquals(intergalactic.trim() + " is " + testResult, executionResult);
+        Assertions.assertEquals(intergalactic.trim().toLowerCase() + " is " + testResult, executionResult);
     }
 
     private void initMocks() {
@@ -57,7 +57,7 @@ public class NumeralQueryGuideInterpreterTests {
 
     @Test
     public void validAssignments() {
-        Assertions.assertTrue(interpreter.matches("how much is pish tegj glob glob ?"));
+        Assertions.assertTrue(interpreter.matches("how muCh is pish tegj glob glob ?"));
         Assertions.assertTrue(interpreter.matches("how much is pish tegj glob  glob ?"));
         Assertions.assertTrue(interpreter.matches("how much is   pish tegj glob glob   ?"));
     }
@@ -81,7 +81,7 @@ public class NumeralQueryGuideInterpreterTests {
         @Test
         public void testAssignment() {
             converter.setRomanForIntergalactic("glob", "I");
-            String result = interpreter.execute("how much is glob glob glob ?");
+            String result = interpreter.execute("How mUCh is gLOb gLob Glob ?");
             Assertions.assertEquals("glob glob glob is 3", result);
         }
     }

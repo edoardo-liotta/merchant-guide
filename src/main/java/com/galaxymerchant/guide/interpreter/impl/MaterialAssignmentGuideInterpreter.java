@@ -15,7 +15,7 @@ public class MaterialAssignmentGuideInterpreter implements GuideInterpreter {
     private static final String INTERGALACTIC_GROUP = "intergalactic";
     private static final String MATERIAL_GROUP = "material";
     private static final String CREDITS_GROUP = "credits";
-    private static final Pattern PATTERN = Pattern.compile("^ *(?<" + INTERGALACTIC_GROUP + ">[\\w ]+) +units of +(?<" + MATERIAL_GROUP + ">.+) +are worth (?<" + CREDITS_GROUP + ">\\d+) Credits$");
+    private static final Pattern PATTERN = Pattern.compile("^ *(?<" + INTERGALACTIC_GROUP + ">[\\w ]+) +units of +(?<" + MATERIAL_GROUP + ">.+) +are worth (?<" + CREDITS_GROUP + ">\\d+) Credits$", Pattern.CASE_INSENSITIVE);
 
     private ApplicationContext applicationContext;
 
@@ -28,8 +28,8 @@ public class MaterialAssignmentGuideInterpreter implements GuideInterpreter {
         String material = m.group(MATERIAL_GROUP);
         long credits = Long.parseLong(m.group(CREDITS_GROUP));
         MaterialAssignmentCommand bean = applicationContext.getBean(MaterialAssignmentCommand.class);
-        bean.setIntergalactic(intergalactic);
-        bean.setMaterial(material);
+        bean.setIntergalactic(intergalactic.toLowerCase());
+        bean.setMaterial(material.toLowerCase());
         bean.setCredits(credits);
         bean.execute();
 

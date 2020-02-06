@@ -1,12 +1,12 @@
-glob means I
-prok means V
-pish means X
+gLob means I
+prOk Means V
+pish IS x
 tegj means L
-glob glob units of Silver are worth 34 Credits
+glOB glOb unITs of sILver are WOrth 34 credits
 glob prok units of Gold are worth 57800 Credits
 pish pish units of Iron are worth 3910 Credits
-how much is pish tegj glob glob ?
-how many Credits is glob prok Silver ?
+How much is Pish Tegj Glob Glob ?
+How many credits is glob prok silver ?
 how many Credits is glob prok Gold ?
 how many Credits is glob prok Iron ?
 how much wood could a woodchuck chuck if a woodchuck could chuck wood ?

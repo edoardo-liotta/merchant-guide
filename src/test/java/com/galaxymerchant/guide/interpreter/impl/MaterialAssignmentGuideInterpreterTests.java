@@ -35,8 +35,8 @@ public class MaterialAssignmentGuideInterpreterTests {
 
     @Test
     public void simpleAssignment() {
-        testAssignment("glob glob     ", "Silver", 34);
-        testAssignment("glob pish    ", "Iron Bronze", 30);
+        testAssignment("glob glob     ", "SilvEr", 34);
+        testAssignment("glob piSH    ", "Iron Bronze", 30);
     }
 
     private void testAssignment(String intergalacticNumber, String material, long credits) {
@@ -45,8 +45,8 @@ public class MaterialAssignmentGuideInterpreterTests {
         String testCommand = intergalacticNumber + " units of " + material + " are worth " + credits + " Credits";
         Assertions.assertTrue(interpreter.matches(testCommand));
         interpreter.execute(testCommand);
-        Mockito.verify(command).setIntergalactic(intergalacticNumber);
-        Mockito.verify(command).setMaterial(material);
+        Mockito.verify(command).setIntergalactic(intergalacticNumber.toLowerCase());
+        Mockito.verify(command).setMaterial(material.toLowerCase());
         Mockito.verify(command).setCredits(credits);
         Mockito.verify(command).execute();
     }
@@ -72,7 +72,7 @@ public class MaterialAssignmentGuideInterpreterTests {
         public void testAssignment() {
             converter.setRomanForIntergalactic("glob", "I");
             interpreter.execute("glob glob units of Silver are worth 30 Credits");
-            BigDecimal numeral = converter.getUnitValueForMaterial("Silver");
+            BigDecimal numeral = converter.getUnitValueForMaterial("silver");
             Assertions.assertEquals(BigDecimal.valueOf(15), numeral);
         }
     }

@@ -36,7 +36,7 @@ public class RomanAssignmentGuideInterpreterTests {
 
     @Test
     public void simpleAssignment() {
-        String testCommand = "glob means I";
+        String testCommand = "gloB means i";
         Assertions.assertTrue(interpreter.matches(testCommand));
         interpreter.execute(testCommand);
         Mockito.verify(command).setIntergalactic("glob");

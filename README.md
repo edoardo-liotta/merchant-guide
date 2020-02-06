@@ -21,8 +21,8 @@ The Guide currently interprets four commands:
 - Lines are read one by one using java.nio.Files
 - Valid assignment commands (either roman or credit) do not produce any output
 - Query commands end with a question mark, separated by the last word by one space at least
-- Roman numerals should be written in Capital, e.g. 'glob is I'
-- Commands are case-sensitive, and so are Intergalactic keywords and Materials
+- Roman numerals don't need to be written in Capital, e.g. 'glob is i' is still a valid command
+- Commands are case-insensitive, and so are Intergalactic keywords and Materials
 - Material names can contain spaces, Intergalactic numbers may not
 - Valid Intergalactic numbers may not exceed 3999 (MMMCMXCIX)
 

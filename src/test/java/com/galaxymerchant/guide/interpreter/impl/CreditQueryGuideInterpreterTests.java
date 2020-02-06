@@ -2,6 +2,7 @@ package com.galaxymerchant.guide.interpreter.impl;
 
 import com.galaxymerchant.guide.command.impl.CreditQueryCommand;
 import com.galaxymerchant.guide.converter.IntergalacticConverter;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,22 +36,22 @@ public class CreditQueryGuideInterpreterTests {
 
     @Test
     public void simpleAssignment() {
-        runTest("glob prok", "Silver", 3, BigDecimal.valueOf(15));
-        runTest("glob prok  ", "Iron Bronze  ", 4, BigDecimal.valueOf(45));
+        runTest("gLob prok", "silver", 3, BigDecimal.valueOf(15));
+        runTest("glob prok  ", "IRon Bronze  ", 4, BigDecimal.valueOf(45));
     }
 
     private void runTest(String intergalactic, String material, int numeral, BigDecimal unitValue) {
         MockitoAnnotations.initMocks(this);
         Mockito.when(applicationContext.getBean(CreditQueryCommand.class)).thenReturn(command);
         BigDecimal multiply = unitValue.multiply(BigDecimal.valueOf(numeral));
-        String testCommand = "how many Credits is " + intergalactic + " " + material + " ?";
+        String testCommand = "How many credits is " + intergalactic + " " + material + " ?";
         Assertions.assertTrue(interpreter.matches(testCommand));
-        Mockito.when(command.getIntergalactic()).thenReturn(intergalactic.trim());
-        Mockito.when(command.getMaterial()).thenReturn(material.trim());
+        Mockito.when(command.getIntergalactic()).thenReturn(intergalactic.trim().toLowerCase());
+        Mockito.when(command.getMaterial()).thenReturn(material.trim().toLowerCase());
         Mockito.when(command.getResult()).thenReturn(multiply);
         String result = interpreter.execute(testCommand);
-        Mockito.verify(command).setRequest(intergalactic + " " + material);
-        String expectedResult = intergalactic.trim() + " " + material.trim() + " is " + multiply.toString() + " Credits";
+        Mockito.verify(command).setRequest((intergalactic + " " + material).toLowerCase());
+        String expectedResult = intergalactic.trim().toLowerCase() + " " + StringUtils.capitalize(material.trim().toLowerCase()) + " is " + multiply.toString() + " Credits";
         Assertions.assertEquals(expectedResult, result);
     }
 
@@ -81,8 +82,8 @@ public class CreditQueryGuideInterpreterTests {
         @Test
         public void testAssignment() {
             converter.setRomanForIntergalactic("glob", "I");
-            converter.setUnitValueForMaterial("Silver", 50, 1);
-            String result = interpreter.execute("how many Credits is glob glob  glob   Silver ?");
+            converter.setUnitValueForMaterial("silver", 50, 1);
+            String result = interpreter.execute("How many credits is glOB gLob  glob   silver ?");
             Assertions.assertEquals("glob glob glob Silver is 150 Credits", result);
         }
     }
