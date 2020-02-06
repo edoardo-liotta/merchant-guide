@@ -73,7 +73,7 @@ public class MaterialAssignmentGuideInterpreterTests {
             converter.setRomanForIntergalactic("glob", "I");
             interpreter.execute("glob glob units of Silver are worth 30 Credits");
             BigDecimal numeral = converter.getUnitValueForMaterial("silver");
-            Assertions.assertEquals(BigDecimal.valueOf(15), numeral);
+            Assertions.assertEquals(BigDecimal.valueOf(15).doubleValue(), numeral.doubleValue());
         }
     }
 }

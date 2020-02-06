@@ -18,8 +18,8 @@ public class IntergalacticConverterTests {
 
     @Test
     public void testUnitDivision() {
-        converter.setUnitValueForMaterial("Silver", 34, 2);
-        Assertions.assertEquals(BigDecimal.valueOf(17), converter.getUnitValueForMaterial("Silver"));
+        converter.setUnitValueForMaterial("silver", 34, 2);
+        Assertions.assertEquals(BigDecimal.valueOf(17).doubleValue(), converter.getUnitValueForMaterial("silver").doubleValue());
     }
 
     @Test
