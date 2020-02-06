@@ -5,7 +5,8 @@
 This Spring Boot project is a solution to the common Merchant's Guide problem. The proposed approach looks for an input file from command-line arguments and generates an output "-result.txt" file next to it. 
 
 ## Usage
-From the project's home folder, run ```./mvnw spring-boot:run -Dspring-boot.run.arguments="-f path-to-file.txt"``` (on Windows, use 'mvnw' command). File path can be either absolute or relative, and can make use of ~ as user home. At this stage, the application cannot be run in interactive mode.
+From the project's home folder, run ```./mvnw spring-boot:run -Dspring-boot.run.arguments="-f path-to-file.txt"``` (on Windows, use 'mvnw' command). Alternatively, you can ```mvn package``` the project as a JAR file and run it, e.g. ```java -jar guide-0.0.1-SNAPSHOT.jar -f ../test.txt```
+File path can be either absolute or relative, and can make use of ~ as user home. At this stage, the application cannot be run in interactive mode.
 The Guide currently interprets four commands:
 - Roman assignment: an Intergalactic keyword is assigned a Roman numeral, e.g. 'glob is I' or 'pish means V'
 
